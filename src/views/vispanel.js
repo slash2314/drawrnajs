@@ -1,6 +1,7 @@
 var Backbone = require("backbone");
 var cytoscape = require("cytoscape");
-var $ = jQuery = require("jquery");
+var jQuery = require("jquery");
+var $ = jQuery;
 var Link = require("../models/link");
 var AnnoView = require("./annoview");
 var edgehandles = require("cytoscape-edgehandles")(cytoscape, $);
@@ -71,25 +72,30 @@ var Vispanel = Backbone.View.extend({
             userZoomingEnabled: true
     	});
 
-        this.cy.edgehandles({
-            loopAllowed: function(node){
-                // for the specified node, return whether edges from itself to itself are allowed
-                return false;
-            },
-            complete: function(srcNode, targetNode, addedEntities){
-                // fired when edgehandles is done and entities are added
-                self.struct.get("links").newBond(srcNode[0].id(), targetNode[0].id());
-            },
-            enabled: false,
-            preview: false
-		});
+        try {
+            this.cy.edgehandles({
+                loopAllowed: function(node){
+                    // for the specified node, return whether edges from itself to itself are allowed
+                    return false;
+                },
+                complete: function(srcNode, targetNode, addedEntities){
+                    // fired when edgehandles is done and entities are added
+                    self.struct.get("links").newBond(srcNode[0].id(), targetNode[0].id());
+                },
+                enabled: false,
+                preview: false
+            });
+        } catch(e) {
+            // edgehandles may not be compatible with this version of cytoscape
+            console.warn("edgehandles not available:", e.message);
+        }
 
         this.trigger("rendered");
     },
     setResidueNodes: function(cy){
         //index nodes
         for(var i=1; i<this.struct.get("seq").length/5; i++){
-            pos = this.getPos(this.struct, (i*5)-1);
+            var pos = this.getPos(this.struct, (i*5)-1);
             this.cy.add({
                 group: "nodes",
                 data: {

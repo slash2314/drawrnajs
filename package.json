@@ -22,12 +22,11 @@
   ],
   "main": "src/drawrna.js",
   "scripts": {
-    "test": "echo 'Error: no test specified' && exit 1",
-    "build": "mkdirp build && browserify -r ./:drawrnajs -o build/drawrnajs.js",
-    "build-browser": "npm run build",
-    "prepublish": "npm run build",
-    "watch": "watchify -r ./:drawrnajs -v -o build/drawrnajs.js",
-    "sniper": "sniper ."
+    "test": "bun test",
+    "build": "bun build src/drawrna.js --outfile build/drawrnajs.js --format esm --minify",
+    "watch": "bun build src/drawrna.js --outfile build/drawrnajs.js --format esm --watch",
+    "dev": "bun run build && bun --hot server.js",
+    "prepublish": "bun run build"
   },
   "dependencies": {
     "cytoscape": "2.4.6",
@@ -38,12 +37,7 @@
     "bootstrap": "^3.3.5",
     "tooltip": "^1.6.0"
   },
-  "devDependencies": {
-    "mkdirp": "^0.5.0",
-    "browserify": "6.x",
-    "sniper": "^0.2.16",
-    "watchify": "^1.0.6"
-  },
+  "devDependencies": {},
   "sniper": {
     "js": [
       "/build/drawrnajs.js"

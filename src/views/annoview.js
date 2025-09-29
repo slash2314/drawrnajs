@@ -1,6 +1,7 @@
 var Backbone = require("backbone");
 var NCAnno = require("../models/ncanno");
-var $ = jQuery = require("jquery");
+var jQuery = require("jquery");
+var $ = jQuery;
 var bootstrap = require("bootstrap");
 
 var AnnoView = Backbone.View.extend({

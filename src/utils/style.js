@@ -1,4 +1,5 @@
-var $ = jQuery = require("jquery");
+var jQuery = require("jquery");
+var $ = jQuery;
 var cytoscape = require("cytoscape");
 
 var Style = module.exports = function(theme){

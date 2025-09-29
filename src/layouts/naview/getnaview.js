@@ -1,6 +1,6 @@
 var NAView = require("./naview");
 
-getCoordsNAVIEW = module.exports = function(nodes, links){
+var getCoordsNAVIEW = module.exports = function(nodes, links){
 	//Calculates coordinates according to the NAView layout
 	var pairTable = [];
 
@@ -15,7 +15,7 @@ getCoordsNAVIEW = module.exports = function(nodes, links){
 	for (var i = 0; i < nodes.length; i++) {
 		coords.push({
 			x: Math.round(xy.x[i] * 2.5),
-			y: Math.round(xy.y[i] * 2.5)
+			y: -Math.round(xy.y[i] * 2.5)
 		});
 	}
 	return coords;

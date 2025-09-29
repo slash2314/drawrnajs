@@ -1,5 +1,6 @@
 var Backbone = require("backbone");
-var $ = jQuery = require("jquery");
+var jQuery = require("jquery");
+var $ = jQuery;
 var spectrum = require("../utils/spectrum")($);
 var lassotool = require("../utils/lasso")($);
 var _ = require("underscore");

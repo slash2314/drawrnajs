@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DrawRNA.js Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #rna-container {
+            width: 800px;
+            height: 600px;
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        .cy {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>window.jQuery = window.$ = jQuery;</script>
+</head>
+<body>
+    <h1>DrawRNA.js - Simple RNA Structure</h1>
+    <div id="rna-container"></div>
+
+    <script type="module">
+        import Drawrnajs from './build/drawrnajs.js';
+
+        // Simple hairpin structure
+        const input = [
+            "GGAGGGTGAGCATCTGGTGATGCAGGGGTCCTGCTAAGGCCCTACGGATTCACACCCGTGAGTTTCGATTACTCCTCCCTCCGC",
+            "((((((.ss((((dddddd))))s((((((ccAAAcc))))))vvvvvvvvvvvvvvv.((((ttttttt))))..))))))"
+        ];
+
+        const app = new Drawrnajs({
+            el: document.getElementById('rna-container'),
+            seq: input[0],
+            dotbr: input[1],
+            layout: "naview",
+            seqpanel: false,
+            optspanel: false,
+            resindex: true
+        });
+
+        app.render();
+    </script>
+</body>
+</html>

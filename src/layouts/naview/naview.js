@@ -222,6 +222,21 @@ NAView.prototype.find_central_loop = function find_central_loop(){
     var maxconn = null;
     var maxdepth = null;
     var i = null;
+    var self = this;
+
+    var determine_depths = function() {
+        var lp = new Loop();
+        var i = null;
+        var j = null;
+
+        for (i = 0; i < self.loop_count; i++) {
+            lp = self.loops[i];
+            for (j = 0; j < self.loop_count; j++){
+                self.loops[j].setMark(false);
+            }
+            lp.setDepth(depth(lp));
+        }
+    };
 
     determine_depths();
     maxconn = 0;
@@ -237,20 +252,6 @@ NAView.prototype.find_central_loop = function find_central_loop(){
             maxdepth = lp.getDepth();
             this.root = lp;
         }
-    }
-}
-
-function determine_depths() {
-    var lp = new Loop();
-    var i = null;
-    var j = null;
-
-    for (i = 0; i < this.loop_count; i++) {
-        lp = this.loops[i];
-        for (j = 0; j < this.loop_count; j++){
-            this.loops[j].setMark(false);
-        }
-        lp.setDepth(depth(lp));
     }
 }
 
